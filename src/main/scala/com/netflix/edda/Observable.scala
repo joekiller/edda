@@ -59,7 +59,7 @@ abstract class Observable extends StateMachine {
       val msg = Observe(Actor.self, actor)
       if (logger.isDebugEnabled) logger.debug(s"$req${Actor.self} sending: $msg -> $this with 60s timeout")
       this ! msg
-      Actor.self.reactWithin(60000) {
+      Actor.self.reactWithin(120000) {
         case msg: OK => {
           if (logger.isDebugEnabled) logger.debug(s"$req${Actor.self} received: $msg from $sender")
           p success msg
@@ -81,7 +81,7 @@ abstract class Observable extends StateMachine {
       val msg = Ignore(Actor.self, actor)
       if (logger.isDebugEnabled) logger.debug(s"$req${Actor.self} sending: $msg -> $this with 60s timeout")
       this ! msg
-      Actor.self.reactWithin(60000) {
+      Actor.self.reactWithin(120000) {
         case msg: OK => {
           if (logger.isDebugEnabled) logger.debug(s"$req${Actor.self} received: $msg from $sender")
           p success msg
